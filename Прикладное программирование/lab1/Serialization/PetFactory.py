@@ -1,5 +1,5 @@
-from Pets import Dog, Cat, Parrot, Rabbit, Fish, Hamster, Turtle, Snake, Horse
-from exceptions import InvalidPetTypeException
+from models.Pets import Dog, Cat, Parrot, Rabbit, Fish, Hamster, Turtle, Snake, Horse
+from exceptions.Exceptions import InvalidPetTypeException
 
 class PetFactory:
     pets = {

@@ -1,11 +1,11 @@
 
-from Serialization.Interface.ISerializer import ISerializer
-from Pets import Pet
-from Serialization.PetFactory import PetFactory
-from Serialization.Storage import Storage
-from Serialization.Serializers.JsonSerializer import JsonSerializer
-from Serialization.Serializers.XmlSerializer import XmlSerializer
-from exceptions import InvalidPetTypeException, InvalidFileTypeException
+from serialization.interfaces.ISerializer import ISerializer
+from models.Pets import Pet
+from serialization.PetFactory import PetFactory
+from serialization.Storage import Storage
+from serialization.serializers.JsonSerializer import JsonSerializer
+from serialization.serializers.XmlSerializer import XmlSerializer
+from exceptions.Exceptions import InvalidPetTypeException, InvalidFileTypeException
 
 
 def create_serializer(file_type) -> ISerializer:

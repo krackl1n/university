@@ -1,10 +1,9 @@
 import xml.etree.ElementTree as ET
 
-from Serialization.Interface.ISerializer import ISerializer
-from Serialization.PetFactory import PetFactory
+from serialization.interfaces.ISerializer import ISerializer
+from serialization.PetFactory import PetFactory
 
 
-# Сериализация в XML
 class XmlSerializer(ISerializer):
     def to_format(self, pets):
         root = ET.Element("Pets")
