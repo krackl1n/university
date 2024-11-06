@@ -1,7 +1,7 @@
 import xml.etree.ElementTree as ET
 
-from serialization.interfaces.ISerializer import ISerializer
-from serialization.PetFactory import PetFactory
+from storage.serializers.ISerializer import ISerializer
+from storage.PetFactory import PetFactory
 
 
 class XmlSerializer(ISerializer):

@@ -1,10 +1,10 @@
 
-from serialization.interfaces.ISerializer import ISerializer
+from storage.serializers.ISerializer import ISerializer
 from models.Pets import Pet
-from serialization.PetFactory import PetFactory
-from serialization.Storage import Storage
-from serialization.serializers.JsonSerializer import JsonSerializer
-from serialization.serializers.XmlSerializer import XmlSerializer
+from storage.PetFactory import PetFactory
+from storage.Storage import Storage
+from storage.serializers.JsonSerializer import JsonSerializer
+from storage.serializers.XmlSerializer import XmlSerializer
 from exceptions.Exceptions import InvalidPetTypeException, InvalidFileTypeException
 
 

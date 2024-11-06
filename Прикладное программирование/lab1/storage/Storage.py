@@ -1,4 +1,4 @@
-from serialization.interfaces.ISerializer import ISerializer
+from storage.serializers.ISerializer import ISerializer
 from models.Pets import Pet
 
 class Storage:
