@@ -206,7 +206,7 @@ int main() {
         switch (choice) {
         case 1:
             start = std::chrono::high_resolution_clock::now();
-            mergeListSort(arr, N);  // Функция, которую нужно реализовать
+            mergeListSort(arr, N);
             break;
         case 2:
             start = std::chrono::high_resolution_clock::now();
@@ -230,6 +230,10 @@ int main() {
 
         if (isSorted(arr, N)) {
             std::cout << "Array is correctly sorted.\n";
+            for (int i = 0; i < 16; ++i) {
+                std::cout << arr[i] << " ";
+            }
+            std::cout << std::endl;
             writeArrayToFile(arr, N, "../sorted_array.txt");
         } else {
             std::cerr << "Error: Array is not sorted correctly.\n";
