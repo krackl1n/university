@@ -1,4 +1,6 @@
 class Pet:
+
+
     def __init__(self, name, age) -> None:
         self._name = name
         self._age = age
@@ -26,7 +28,7 @@ class Pet:
     @age.setter
     def age(self, age) -> None:
         if not isinstance(age, int):
-            raise ValueError("")
+            raise ValueError("Возраст должен быть числом!")
         self._age = age
 
 

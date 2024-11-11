@@ -15,11 +15,11 @@ def create_serializer(file_type) -> ISerializer:
     }
 
     if file_type not in file_types:
-        raise InvalidFileTypeException(file_type)
+          raise    InvalidFileTypeException(file_type)
     return file_types[file_type]
 
 
-def create_pet() -> Pet:
+def input_pet() -> Pet:
     try:
         pet_type = input("Введите тип питомца (Dog, Cat, Parrot, etc.): ")
         name = input("Введите имя питомца: ")
@@ -47,7 +47,7 @@ if __name__ == "__main__":
 
         match choice:
             case "1":
-                pet = create_pet()
+                pet = input_pet()
                 if not pet:
                     continue
                 pets.append(pet)
