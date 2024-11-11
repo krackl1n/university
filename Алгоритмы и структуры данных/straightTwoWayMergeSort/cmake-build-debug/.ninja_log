@@ -1,0 +1,8 @@
+# ninja log v6
+1102	1142	1731147547959388747	sortingAlgorithm	c2d911544a8f1b6
+88	91	1731147546946064603	CMakeFiles/sortingAlgorithm.dir/main.cpp.o.modmap	c58c7543c4c787b0
+88	91	1731147546946064603	/home/user/Projects/university/sortingAlgorithm/cmake-build-debug/CMakeFiles/sortingAlgorithm.dir/CXXModules.json	c58c7543c4c787b0
+88	91	1731147546946064603	CMakeFiles/sortingAlgorithm.dir/CXX.dd	c58c7543c4c787b0
+91	1102	1731147546949397906	CMakeFiles/sortingAlgorithm.dir/main.cpp.o	a318decd8990b1b
+1	88	1731147546859398715	CMakeFiles/sortingAlgorithm.dir/main.cpp.o.ddi	84eff7df5f9bb4a5
+0	14	1731327494237579537	build.ninja	dc58a8276e62fe4c
