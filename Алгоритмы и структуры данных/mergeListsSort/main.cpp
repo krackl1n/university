@@ -17,6 +17,7 @@ void mergeListSort(int* arr, int N) {
     //  L1
     L[0] = 1;
     L[N - 1] = 0;
+    L[N] = 0;
     L[N + 1] = 2;
 
     for (int i = 1; i < N - 1; i++) {
@@ -36,9 +37,10 @@ void mergeListSort(int* arr, int N) {
 
         //  L3
         do {
-            if (arr[p] <= arr[q]) {
+            if (arr[p - 1] <= arr[q - 1]) {
+
                 //  L4
-                L[s] = (L[s] < 0) ? -abs(p) : abs(p);
+                L[s] = (L[s] >= 0) ? abs(p) : -abs(p);
                 s = p;
                 p = L[p];
                 if (p > 0) {
@@ -55,7 +57,7 @@ void mergeListSort(int* arr, int N) {
             }
             else {
                 //  L6
-                L[s] = (L[s] < 0) ? -abs(q) : abs(q);
+                L[s] = (L[s] >= 0) ? abs(q) : -abs(q);
                 s = q;
                 q = L[q];
 
@@ -76,182 +78,30 @@ void mergeListSort(int* arr, int N) {
             p = -p;
             q = -q;
 
-            if (q != 0) {
-                continue;
-            }
-            break;
+            if (q == 0) break;
         } while (true);
 
-        L[s] = (L[s] < 0) ? -abs(p) : abs(p);
-        if (std::signbit(L[s])) {
-            L[t] = -0; // Присваиваем отрицательный ноль
-        } else {
-            L[t] = 0; // Присваиваем положительный ноль
-        }
-
-
+        L[s] = (L[s] > 0) ? abs(p) : -abs(p);
+        L[t] = 0;
 
     } while (true);
 
+    int* arr_copy = new int[N];
+    for (int i = 0; i < N; i++) {
+        arr_copy[i] = arr[i];
+    }
 
+    int k = 0;
 
-
-
-
-
-    for (int i = 0; i < N + 2; i++) {
-        std::cout << L[i] << " " << arr[i] << "\n";
+    for (int i = 0; i < N; i++) {
+        k = L[k];
+        arr[i] = arr_copy[k - 1];
     }
 
     delete[] L;
+    delete[] arr_copy;
 }
 
-
-void straightTwoWayMergeSort1(int* arr, int N) {
-    int* R = new int[2 * N];
-
-    for (int i = 0; i < N; i++)
-    {
-        R[i] = arr[i];
-    }
-
-    //  S1 Начальная установка
-    int i, j, k, l, d, q, r;
-    int s = 1, p = 1;
-
-    do {
-        bool flag = false;
-        s = 1 - s;
-        // S2: Подготовка к просмотру
-        if (s == 0) {
-            i = 0;
-            j = N - 1;
-            k = N - 1;
-            l = 2 * N;
-        } else {
-            i = N;
-            j = 2 * N - 1;
-            k = -1;
-            l = N;
-        }
-
-        d = 1;
-        q = p;
-        r = p;
-
-
-        while (true) {
-            // S3
-            if (R[i] <= R[j]) {
-                // S4
-                k += d;
-                R[k] = R[i];
-
-                // S5
-                i += 1;
-                q -= 1;
-
-                if (q > 0) {
-                    continue;
-                }
-
-                // S6
-                do {
-                    k += d;
-                    if (k == l) {
-                        // S13
-                        flag = true;
-                        break;
-                    }
-                    R[k] = R[j];
-
-                    // S7
-                    j -= 1;
-                    r -= 1;
-                }
-                while (r > 0);
-
-            }
-            else {
-                // S8
-                k += d;
-                R[k] = R[j];
-
-                // S9
-                j -= 1;
-                r -= 1;
-                if (r > 0) {
-                    continue;
-                }
-
-                // S10
-                do {
-                    k += d;
-                    if (k == l) {
-                        // НА S13
-                        flag = true;
-                        break;
-                    }
-                    R[k] = R[i];
-
-                    // На S11
-                    i += 1;
-                    q -= 1;
-                }
-                while (q > 0);
-            }
-
-            // S12
-            if (!flag) {
-                q = p;
-                r = p;
-                d = -d;
-                std::swap(k, l);
-
-                if (j - i < p) {
-                    // На S10
-                    do {
-                        k += d;
-                        if (k == l) {
-                            // НА S13
-                            break;
-                        }
-                        R[k] = R[i];
-
-                        // На S11
-                        i += 1;
-                        q -= 1;
-                    }
-                    while (q > 0);
-                }
-                else {
-                    // На S3
-                    continue;
-                }
-            }
-
-            // S13
-            p *= 2;
-            break;
-        }
-    }
-    while (p < N);
-
-    for (int m = 0; m < N; m++) {
-        if (s == 1)
-        {
-            arr[m] = R[m];
-        }
-        else
-        {
-            arr[m] = R[m + N];
-        }
-    }
-
-    delete[] R;
-}
-
-// Функция сортировки пузырьком
 void bubbleSort(int* arr, int N) {
     for (int i = 0; i < N - 1; i++) {
         for (int j = 0; j < N - i - 1; j++) {
