@@ -5,111 +5,69 @@
 #include <chrono>
 #include <map>
 #include <vector>
-#include <cmath>
 
 
+void shakerSort(int* arr, int N) {
+    // B1
+    int left = 0;
+    int right = N - 1;
 
-void mergeListSort(int* arr, int N) {
-    int* L = new int[N + 2];
-
-    int s, p, t, q;
-
-    //  L1
-    L[0] = 1;
-    L[N - 1] = 0;
-    L[N] = 0;
-    L[N + 1] = 2;
-
-    for (int i = 1; i < N - 1; i++) {
-        L[i] = - (i + 2);
-    }
+    // B2
+    int t;
 
     do {
-        //  L2
-        s = 0;
-        t = N + 1;
-        p = L[s];
-        q = L[t];
+        t = 0;
 
-        if (q == 0) {
-            break;
+        // Проход как в пузырьковой сортировке
+        for (int j = left; j < right; j++) {
+            // B3
+            if (arr[j] > arr[j + 1]) {
+                int k = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = k;
+
+                t = j;
+            }
+        }
+        // B4
+        right = t;
+
+        // Проход справа налево
+        for (int j = right; j > left; j--) {
+            if (arr[j] < arr[j - 1]) {
+                int k = arr[j];
+                arr[j] = arr[j - 1];
+                arr[j - 1] = k;
+                t = j;
+            }
         }
 
-        //  L3
-        do {
-            if (arr[p - 1] <= arr[q - 1]) {
+        left = t;
 
-                //  L4
-                L[s] = (L[s] >= 0) ? abs(p) : -abs(p);
-                s = p;
-                p = L[p];
-                if (p > 0) {
-                    continue;
-                }
-
-                //  L5
-                L[s] = q;
-                s = t;
-                do {
-                    t = q;
-                    q = L[q];
-                } while (q > 0);
-            }
-            else {
-                //  L6
-                L[s] = (L[s] >= 0) ? abs(q) : -abs(q);
-                s = q;
-                q = L[q];
-
-                if (q > 0) {
-                    continue;
-                }
-
-                //  L7
-                L[s] = p;
-                s = t;
-                do {
-                    t = p;
-                    p = L[p];
-                } while (p > 0);
-            }
-
-            //  L8
-            p = -p;
-            q = -q;
-
-            if (q == 0) break;
-        } while (true);
-
-        L[s] = (L[s] > 0) ? abs(p) : -abs(p);
-        L[t] = 0;
-
-    } while (true);
-
-    int* arr_copy = new int[N];
-    for (int i = 0; i < N; i++) {
-        arr_copy[i] = arr[i];
-    }
-
-    int k = 0;
-
-    for (int i = 0; i < N; i++) {
-        k = L[k];
-        arr[i] = arr_copy[k - 1];
-    }
-
-    delete[] L;
-    delete[] arr_copy;
+    } while (left < right);
 }
 
+
 void bubbleSort(int* arr, int N) {
-    for (int i = 0; i < N - 1; i++) {
-        for (int j = 0; j < N - i - 1; j++) {
+    // B1
+    int bound = N - 1;
+    // B2
+    int t;
+    do {
+        t = 0;
+        for (int j = 0; j < bound; j++) {
+            // B3
             if (arr[j] > arr[j + 1]) {
-                std::swap(arr[j], arr[j + 1]);
+                int k = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = k;
+
+                t = j;
             }
         }
-    }
+        // B4
+        bound = t;
+    } while (t != 0);
 }
 
 void writeArrayToFile(const int* arr, int N, const std::string& filename) {
@@ -195,7 +153,7 @@ int main() {
 
         int choice;
         std::cout << "Choose sorting method:\n";
-        std::cout << "1. mergeListSort\n";
+        std::cout << "1. shakerSort\n";
         std::cout << "2. qsort\n";
         std::cout << "3. bubbleSort\n";
         std::cout << "4. exit\n";
@@ -206,7 +164,7 @@ int main() {
         switch (choice) {
         case 1:
             start = std::chrono::high_resolution_clock::now();
-            mergeListSort(arr, N);  // Функция, которую нужно реализовать
+            shakerSort(arr, N);
             break;
         case 2:
             start = std::chrono::high_resolution_clock::now();
@@ -230,6 +188,10 @@ int main() {
 
         if (isSorted(arr, N)) {
             std::cout << "Array is correctly sorted.\n";
+            for (int i = 0; i < 16; ++i) {
+                std::cout << arr[i] << " ";
+            }
+            std::cout << std::endl;
             writeArrayToFile(arr, N, "../sorted_array.txt");
         } else {
             std::cerr << "Error: Array is not sorted correctly.\n";
