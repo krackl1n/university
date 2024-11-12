@@ -1,6 +1,6 @@
 import json
-from storage.serializers.ISerializer import ISerializer
-from storage.PetFactory import PetFactory
+from interfaces.serializer_interface import ISerializer
+from storage.pet_factory import PetFactory
 
 
 class JsonSerializer(ISerializer):

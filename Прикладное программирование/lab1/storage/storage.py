@@ -1,5 +1,5 @@
-from storage.serializers.ISerializer import ISerializer
-from models.Pets import Pet
+from interfaces.serializer_interface import ISerializer
+from models.pets import Pet
 
 class Storage:
     def __init__(self, serializer: ISerializer):

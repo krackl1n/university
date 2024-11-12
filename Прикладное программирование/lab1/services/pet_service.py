@@ -1,8 +1,9 @@
-from models.pets import Dog, Cat, Parrot, Rabbit, Fish, Hamster, Turtle, Snake, Horse
 from exceptions.exceptions import InvalidPetTypeException
+from models.pets import Cat, Dog, Fish, Hamster, Horse, Parrot, Rabbit, Snake, Turtle
 
-class PetFactory:
-    pets = {
+
+class PetService():
+    pet_factory_map = {
         'Dog': lambda name, age: Dog(name, age),
         'Cat': lambda name, age: Cat(name, age),
         'Parrot': lambda name, age: Parrot(name, age),
@@ -14,8 +15,13 @@ class PetFactory:
         'Horse': lambda name, age: Horse(name, age)
     }
 
-    @staticmethod
-    def create_pet(pet_type: str, name: str, age: int):
-        if pet_type not in PetFactory.pets:
+    def create(self, pet_type: str, name: str, age: int):
+        if pet_type not in self.pet_factory_map:
             raise InvalidPetTypeException(pet_type)
-        return PetFactory.pets[pet_type](name, age)
+        return self.pet_factory_map[pet_type](name, age)
+    
+    def delete(self):
+        print(self.pet)
+        pass
+    
+

@@ -1,10 +1,11 @@
 
-from storage.serializers.ISerializer import ISerializer
+from interfaces.serializer_interface import ISerializer
 from models.pets import Pet
+from services.pet_service import PetService
 from storage.pet_factory import PetFactory
 from storage.storage import Storage
-from storage.serializers.JsonSerializer import JsonSerializer
-from storage.serializers.XmlSerializer import XmlSerializer
+from storage.serializers.json_serializer import JsonSerializer
+from storage.serializers.xml_serializer import XmlSerializer
 from exceptions.exceptions import InvalidPetTypeException, InvalidFileTypeException
 
 
@@ -24,7 +25,7 @@ def input_pet() -> Pet:
         pet_type = input("Введите тип питомца (Dog, Cat, Parrot, etc.): ")
         name = input("Введите имя питомца: ")
         age = int(input("Введите возраст питомца: "))
-        return PetFactory.create_pet(pet_type, name, age)
+        return pet_service.create(pet_type, name, age)
     except ValueError:
         print("Ошибка: возраст должен быть числом.")
     except InvalidPetTypeException as e:
@@ -32,6 +33,7 @@ def input_pet() -> Pet:
 
 
 if __name__ == "__main__":
+    pet_service = PetService()
     pets = []
     storage = None
 
