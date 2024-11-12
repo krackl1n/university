@@ -1,5 +1,5 @@
 from models.Pets import Dog, Cat, Parrot, Rabbit, Fish, Hamster, Turtle, Snake, Horse
-from exceptions.Exceptions import InvalidPetTypeException
+from exceptions.exceptions import InvalidPetTypeException
 
 class PetFactory:
     pets = {
@@ -15,7 +15,7 @@ class PetFactory:
     }
 
     @staticmethod
-    def create_pet(pet_type, name, age):
+    def create_pet(pet_type: str, name: str, age: int):
         if pet_type not in PetFactory.pets:
             raise InvalidPetTypeException(pet_type)
         return PetFactory.pets[pet_type](name, age)
