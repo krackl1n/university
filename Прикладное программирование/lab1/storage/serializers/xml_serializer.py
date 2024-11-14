@@ -1,7 +1,7 @@
 import xml.etree.ElementTree as ET
 
 from interfaces.serializer_interface import ISerializer
-from storage.pet_factory import PetFactory
+from services.pet_service import PetService
 
 
 class XmlSerializer(ISerializer):
@@ -23,5 +23,6 @@ class XmlSerializer(ISerializer):
             pet_type = pet_element.tag
             name = pet_element.find('name').text
             age = int(pet_element.find('age').text)
-            pets.append(PetFactory.create_pet(pet_type, name, age))
+            pet_service = PetService()
+            pets.append(pet_service.create(pet_type, name, age))
         return pets

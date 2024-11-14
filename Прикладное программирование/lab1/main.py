@@ -2,7 +2,6 @@
 from interfaces.serializer_interface import ISerializer
 from models.pets import Pet
 from services.pet_service import PetService
-from storage.pet_factory import PetFactory
 from storage.storage import Storage
 from storage.serializers.json_serializer import JsonSerializer
 from storage.serializers.xml_serializer import XmlSerializer

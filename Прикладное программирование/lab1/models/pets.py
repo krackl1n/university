@@ -1,6 +1,4 @@
 class Pet:
-
-
     def __init__(self, name, age) -> None:
         self._name = name
         self._age = age
@@ -30,7 +28,6 @@ class Pet:
         if not isinstance(age, int):
             raise ValueError("Возраст должен быть числом!")
         self._age = age
-
 
 class Dog(Pet):
     def make_sound(self) -> None:
